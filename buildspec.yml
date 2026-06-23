@@ -20,7 +20,7 @@ artifacts:
     - 'book-backend.jar'
     - 'appspec.yml'
     - 'deploy-scripts/**/*'
-  discard-paths: yes
+  discard-paths: no
 cache:
   paths:
     - '/root/.gradle/caches/**/*'
