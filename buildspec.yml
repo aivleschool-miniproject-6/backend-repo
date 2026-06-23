@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+
+  pre_build:
+    commands:
+      - cd book-backend
+      - chmod +x gradlew
+
+  build:
+    commands:
+      - ./gradlew test
+      - ./gradlew bootJar
+
+  post_build:
+    commands:
+      - echo "Build completed on $(date)"
+
+artifacts:
+  base-directory: book-backend/build/libs
+  files:
+    - '*.jar'
+  discard-paths: yes
+
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
