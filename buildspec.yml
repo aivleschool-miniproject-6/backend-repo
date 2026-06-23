@@ -13,7 +13,7 @@ phases:
       - ./gradlew bootJar
   post_build:
     commands:
-      - cp book-backend/build/libs/*.jar book-backend.jar
+      - cp $CODEBUILD_SRC_DIR/book-backend/build/libs/*.jar $CODEBUILD_SRC_DIR/book-backend.jar
       - echo "Build completed on $(date)"
 artifacts:
   files:
