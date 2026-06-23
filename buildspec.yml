@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+  build:
+    commands:
+      - cd book-backend
+      - chmod +x ./gradlew
+      - ./gradlew clean build -x test
+
+artifacts:
+  files:
+    - 'book-backend/build/libs/*.jar'
+  discard-paths: yes
