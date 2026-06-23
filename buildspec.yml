@@ -7,18 +7,18 @@ phases:
 
   pre_build:
     commands:
-      - echo "backend pre_build started"
+      - echo "backend pre_build started!"
       - cd book-backend
       - chmod +x gradlew
 
   build:
     commands:
-      - echo "backend build started"
+      - echo "backend build started!"
       - ./gradlew clean build -x test
 
   post_build:
     commands:
-      - echo "backend build completed"
+      - echo "backend build completed!"
 
 artifacts:
   files:
