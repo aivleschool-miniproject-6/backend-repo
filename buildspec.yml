@@ -1,26 +1,30 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
       java: corretto17
+
   pre_build:
     commands:
-      - cd book-backend
-      - chmod +x gradlew
+      - echo 빌드 시작
+      - java -version
+
   build:
     commands:
-      - ./gradlew test
-      - ./gradlew bootJar
+      - echo 빌드 중...
+      - chmod +x ./gradlew
+      - ./gradlew clean build -x test
+
   post_build:
     commands:
-      - echo "Build completed on $(date)"
+      - echo 빌드 완료
+
 artifacts:
   files:
-    - 'book-backend/build/libs/*.jar'
-    - 'appspec.yml'
-    - 'deploy-scripts/**/*'
-  discard-paths: no
+    - build/libs/*.jar
+  discard-paths: yes
+
 cache:
   paths:
     - '/root/.gradle/caches/**/*'
-    - '/root/.gradle/wrapper/**/*'
