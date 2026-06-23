@@ -3,8 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/book-management-backend.iml" filepath="$PROJECT_DIR$/.idea/book-management-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.iml" filepath="$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.main~1.iml" filepath="$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.main~1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.aivle12.book-backend.test.iml" />
     </modules>
   </component>
 </project>
