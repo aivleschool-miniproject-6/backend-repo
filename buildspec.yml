@@ -13,13 +13,14 @@ phases:
       - ./gradlew bootJar
   post_build:
     commands:
+      - cp book-backend/build/libs/*.jar book-backend.jar
       - echo "Build completed on $(date)"
 artifacts:
   files:
-    - 'book-backend/build/libs/*.jar'
+    - 'book-backend.jar'
     - 'appspec.yml'
     - 'deploy-scripts/**/*'
-  discard-paths: no
+  discard-paths: yes
 cache:
   paths:
     - '/root/.gradle/caches/**/*'
