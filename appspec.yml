@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+
+files:
+  - source: book-backend.jar
+    destination: /opt/app
+
+hooks:
+  ApplicationStart:
+    - location: deploy-scripts/start.sh
+      timeout: 60
+      runas: ec2-user
+
+  ValidateService:
+    - location: deploy-scripts/health_check.sh
+      timeout: 60
+      runas: ec2-user

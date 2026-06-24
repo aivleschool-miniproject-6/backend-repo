@@ -1,21 +1,27 @@
 version: 0.2
-
 phases:
   install:
-    commands:
-      - echo "Install phase"
-
+    runtime-versions:
+      java: corretto17
   pre_build:
     commands:
-      - echo "Pre-build phase"
-      - echo "Current files:"
-      - ls -la
-
+      - cd book-backend
+      - chmod +x gradlew
   build:
     commands:
-      - echo "Build phase"
-      - echo "CI pipeline is working"
-
+      - ./gradlew test
+      - ./gradlew bootJar
   post_build:
     commands:
-      - echo "Build completed successfully"
+      - cp $CODEBUILD_SRC_DIR/book-backend/build/libs/*.jar $CODEBUILD_SRC_DIR/book-backend.jar
+      - echo "Build completed on $(date)"
+artifacts:
+  files:
+    - 'book-backend.jar'
+    - 'appspec.yml'
+    - 'deploy-scripts/**/*'
+  discard-paths: no
+cache:
+  paths:
+    - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
