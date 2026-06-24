@@ -1,5 +1,5 @@
 #!/bin/bash
-sleep 15
+sleep 30
 if ss -tlnp | grep :8080; then
   echo "Application is running"
   exit 0
