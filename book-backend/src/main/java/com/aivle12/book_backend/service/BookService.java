@@ -5,15 +5,18 @@ import com.aivle12.book_backend.dto.BookCoverRequest;
 import com.aivle12.book_backend.dto.BookCreateRequest;
 import com.aivle12.book_backend.dto.BookResponse;
 import com.aivle12.book_backend.dto.BookUpdateRequest;
+import com.aivle12.book_backend.dto.RankingResponse;
 import com.aivle12.book_backend.exception.BookNotFoundException;
 import com.aivle12.book_backend.repository.BookRepository;
 import com.aivle12.book_backend.repository.CommentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -90,6 +93,30 @@ public class BookService {
         Book book = findById(id);
         book.setCoverImageUrl(request.getCoverImageUrl());
         return BookResponse.from(book);
+    }
+
+    @Transactional(readOnly = true)
+    public RankingResponse getMainRanking(int limit) {
+        PageRequest pageable = PageRequest.of(0, limit);
+
+        List<BookResponse> byViewCount = bookRepository
+                .findAllByOrderByViewCountDesc(pageable)
+                .stream().map(this::toResponseWithRating).collect(Collectors.toList());
+
+        LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
+        List<BookResponse> byPubDate = bookRepository
+                .findByPubDateGreaterThanEqualOrderByPubDateDesc(oneMonthAgo, pageable)
+                .stream().map(this::toResponseWithRating).collect(Collectors.toList());
+
+        List<BookResponse> byRating = bookRepository
+                .findTopByAverageRating(limit)
+                .stream().map(this::toResponseWithRating).collect(Collectors.toList());
+
+        return RankingResponse.builder()
+                .viewCount(byViewCount)
+                .pubDate(byPubDate)
+                .rating(byRating)
+                .build();
     }
 
     private BookResponse toResponseWithRating(Book book) {

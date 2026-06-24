@@ -3,6 +3,7 @@ package com.aivle12.book_backend.controller;
 import com.aivle12.book_backend.dto.*;
 import com.aivle12.book_backend.service.AiCoverService;
 import com.aivle12.book_backend.service.BookService;
+import com.aivle12.book_backend.dto.RankingResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,12 @@ public class BookController {
     public ResponseEntity<List<BookResponse>> getBooks(
             @RequestParam(required = false) Long authorId) {
         return ResponseEntity.ok(bookService.getBooks(authorId));
+    }
+
+    @GetMapping("/ranking")
+    public ResponseEntity<RankingResponse> getMainRanking(
+            @RequestParam(defaultValue = "30") int limit) {
+        return ResponseEntity.ok(bookService.getMainRanking(limit));
     }
 
     @GetMapping("/{id}")
