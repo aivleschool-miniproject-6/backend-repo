@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -16,7 +15,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findAllByOrderByViewCountDesc(Pageable pageable);
 
-    List<Book> findByPubDateGreaterThanEqualOrderByPubDateDesc(LocalDate fromDate, Pageable pageable);
+    List<Book> findByPubDateNotNullOrderByPubDateDesc(Pageable pageable);
 
     @Query(value = "SELECT b.* FROM book b LEFT JOIN comment c ON c.book_id = b.id GROUP BY b.id ORDER BY COALESCE(AVG(c.rating), 0) DESC LIMIT :limit", nativeQuery = true)
     List<Book> findTopByAverageRating(@Param("limit") int limit);

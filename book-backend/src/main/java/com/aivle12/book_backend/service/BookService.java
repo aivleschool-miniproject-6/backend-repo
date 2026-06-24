@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -103,9 +102,8 @@ public class BookService {
                 .findAllByOrderByViewCountDesc(pageable)
                 .stream().map(this::toResponseWithRating).collect(Collectors.toList());
 
-        LocalDate oneMonthAgo = LocalDate.now().minusMonths(1);
         List<BookResponse> byPubDate = bookRepository
-                .findByPubDateGreaterThanEqualOrderByPubDateDesc(oneMonthAgo, pageable)
+                .findByPubDateNotNullOrderByPubDateDesc(pageable)
                 .stream().map(this::toResponseWithRating).collect(Collectors.toList());
 
         List<BookResponse> byRating = bookRepository
