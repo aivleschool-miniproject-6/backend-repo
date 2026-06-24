@@ -67,6 +67,9 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/authors/*/follows/status").authenticated()
                         .requestMatchers("/users/followings", "/users/followers").authenticated()
 
+                        // 프리셋 
+                        .requestMatchers("/presets/**").authenticated()
+
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
