@@ -12,7 +12,10 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="com.aivle12.book-backend" target="17" />
+      <module name="com.aivle12.book-backend.main~1" target="17" />
       <module name="com.aivle12.book-backend.main~2" target="17" />
+      <module name="com.aivle12.book-backend.test" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
