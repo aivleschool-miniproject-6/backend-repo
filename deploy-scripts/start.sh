@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo systemctl start book-backend
+sudo systemctl restart book-backend
