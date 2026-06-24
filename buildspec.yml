@@ -13,18 +13,20 @@ phases:
   build:
     commands:
       - echo 빌드 중...
-      - chmod +x ./gradlew
-      - ./gradlew clean build -x test
+      - cd book-backend && chmod +x ./gradlew && ./gradlew clean build -x test
 
   post_build:
     commands:
-      - echo 빌드 완료
+      - echo "Build completed on $(date)"
 
 artifacts:
   files:
-    - build/libs/*.jar
-  discard-paths: yes
+    - 'book-backend/build/libs/*.jar'
+    - 'appspec.yml'
+    - 'deploy-scripts/**/*'
+  discard-paths: no
 
 cache:
   paths:
     - '/root/.gradle/caches/**/*'
+    - '/root/.gradle/wrapper/**/*'
