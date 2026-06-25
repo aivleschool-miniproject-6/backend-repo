@@ -157,6 +157,20 @@ COMMENT
 - rating                별점 (1~5)              @NotNull
 - created_at
 - updated_at
+
+PRESET
+- id (PK)               프리셋 고유번호
+- user_id (FK)          유저 고유번호            @NotNull
+- name                  프리셋 이름              @NotNull
+- prompt (LONGTEXT)     AI 표지 생성 추가 프롬프트
+- style                 표지 스타일 옵션
+- background            배경 옵션
+- lighting              조명 옵션
+- typography            타이포그래피 옵션
+- model                 AI 이미지 생성 모델
+- quality               이미지 생성 품질
+- created_at                                    @PrePersist 자동 설정
+- updated_at                                    @PreUpdate 자동 갱신
 ```
 
 <br>
