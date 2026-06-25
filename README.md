@@ -1,6 +1,6 @@
 # 📚 도서 관리 시스템
 
-> KT AIVLE School AI 트랙 미니 프로젝트 5차 12조 BackEnd
+> KT AIVLE School AI 트랙 미니 프로젝트 5차 12조 BackEnd - v1
 
 
 <br>
