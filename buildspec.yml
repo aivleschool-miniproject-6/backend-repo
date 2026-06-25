@@ -14,7 +14,7 @@ phases:
   post_build:
     commands:
       - cp $CODEBUILD_SRC_DIR/book-backend/build/libs/*.jar $CODEBUILD_SRC_DIR/book-backend.jar
-      - echo "Build completed on $(date)" # trigger3
+      - echo "Build completed on $(date)" # trigger4
 artifacts:
   files:
     - 'book-backend.jar'
